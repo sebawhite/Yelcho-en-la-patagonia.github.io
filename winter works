@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<title>Yelcho — Winter Maintenance Budget</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #0a0a0a;
+    color: #f5f5f7;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    line-height: 1.55;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 64px 32px 120px; }
+
+  /* LOGO HEADER */
+  .logo-header {
+    padding-bottom: 56px;
+    margin-bottom: 56px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+  }
+  .plc-logo {
+    height: 96px;
+    width: auto;
+    display: block;
+  }
+  .plc-logo path,
+  .plc-logo polygon,
+  .plc-logo rect {
+    fill: #f5f5f7 !important;
+  }
+
+  /* HERO (legacy, retained for safety) */
+  .hero {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 56px;
+    margin-bottom: 72px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #86868b;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 18px;
+  }
+  .hero-sub {
+    font-size: 21px;
+    color: #b0b0b6;
+    max-width: 720px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #86868b;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .hero-meta-item .val {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  /* SECTION HEADERS */
+  section { margin-bottom: 96px; scroll-margin-top: 20px; }
+  .sec-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-bottom: 14px;
+    line-height: 1.15;
+  }
+  .sec-sub {
+    font-size: 17px;
+    color: #a0a0a6;
+    max-width: 760px;
+    margin-bottom: 36px;
+  }
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: -0.005em;
+  }
+  h4 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #86868b;
+    margin-bottom: 14px;
+  }
+
+  /* EXEC SUMMARY CARDS */
+  .exec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+  .exec-card {
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s ease, border-color .25s ease;
+  }
+  .exec-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.18); }
+  .exec-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+  }
+  .exec-card .icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+  .exec-card .proj-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #d0d0d6;
+    margin-bottom: 8px;
+  }
+  .exec-card .amount {
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .exec-card .clp {
+    font-size: 13px;
+    color: #86868b;
+    margin-bottom: 14px;
+  }
+  .exec-card .status-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.06);
+    color: #c0c0c6;
+  }
+
+  .total-bar {
+    background: linear-gradient(135deg, rgba(218,119,86,0.08), rgba(218,119,86,0.02));
+    border: 1px solid rgba(218,119,86,0.3);
+    border-radius: 14px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .total-bar .label {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #86868b;
+  }
+  .total-bar .amount {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #DA7756;
+  }
+  .total-bar .sub {
+    font-size: 13px;
+    color: #86868b;
+  }
+
+  /* TWO-COLUMN LAYOUT */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  /* PANELS & CALLOUTS */
+  .panel {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 28px 32px;
+  }
+  .accent-panel {
+    background: var(--accent-soft, rgba(218,119,86,0.08));
+    border-color: var(--accent-border, rgba(218,119,86,0.25));
+  }
+  .panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .panel li {
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #d0d0d6;
+  }
+  .callout {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid rgba(218,119,86,0.5);
+    border-radius: 8px;
+    padding: 18px 20px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #c0c0c6;
+    margin: 20px 0;
+  }
+
+  /* TABLES */
+  .breakdown-table {
+    overflow-x: auto;
+    margin: 24px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead {
+    border-bottom: 2px solid rgba(255,255,255,0.12);
+  }
+  th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    color: #86868b;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+  th.num {
+    text-align: right;
+  }
+  td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: #d0d0d6;
+  }
+  td.num {
+    text-align: right;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #a0a0a6;
+  }
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* PILLS / TAGS */
+  .pill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .pill-quoted {
+    background: rgba(184, 200, 220, 0.15);
+    color: #b8c8dc;
+  }
+  .pill-purchased {
+    background: rgba(134, 185, 134, 0.15);
+    color: #86b986;
+  }
+  .pill-pending {
+    background: rgba(232, 176, 75, 0.15);
+    color: #e8b04b;
+  }
+  .pill-estimated {
+    background: rgba(160, 160, 166, 0.15);
+    color: #a0a0a6;
+  }
+
+  /* COST PANEL */
+  .cost-panel {
+    background: rgba(218,119,86,0.08);
+    border: 1px solid rgba(218,119,86,0.25);
+    border-radius: 12px;
+    padding: 28px 32px;
+  }
+  .cost-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 14px;
+  }
+  .cost-row .desc {
+    color: #a0a0a6;
+  }
+  .cost-row .val {
+    color: #d0d0d6;
+    font-family: 'Courier New', monospace;
+    text-align: right;
+  }
+  .cost-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    margin-top: 4px;
+    border-top: 2px solid rgba(255,255,255,0.12);
+    font-weight: 700;
+  }
+  .cost-total .desc {
+    color: #f5f5f7;
+  }
+  .cost-total .val {
+    font-size: 22px;
+    color: #DA7756;
+  }
+
+  /* CHARTS & STATS */
+  .chart-wrap {
+    background: rgba(255,255,255,0.01);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+  .chart-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #86868b;
+    margin-bottom: 32px;
+  }
+  .bar-row {
+    margin-bottom: 36px;
+  }
+  .bar-row:last-child {
+    margin-bottom: 0;
+  }
+  .bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .bar-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #d0d0d6;
+  }
+  .bar-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f5f5f7;
+  }
+  .bar-value .clp {
+    font-size: 12px;
+    color: #86868b;
+    margin-left: 8px;
+  }
+  .bar-track {
+    height: 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width .3s ease;
+  }
+
+  .sum-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #86868b;
+    margin-bottom: 8px;
+  }
+  .stat-val {
+    font-size: 28px;
+    font-weight: 700;
+    color: #f5f5f7;
+    margin-bottom: 4px;
+  }
+  .stat-sub {
+    font-size: 12px;
+    color: #86868b;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    margin: 0;
+  }
+  .tl-item {
+    padding-left: 28px;
+    margin-bottom: 32px;
+    position: relative;
+    --dot-color: #86868b;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--dot-color);
+  }
+  .tl-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 24px;
+    width: 2px;
+    height: calc(100% + 8px);
+    background: rgba(255,255,255,0.08);
+  }
+  .tl-meta {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #86868b;
+    margin-bottom: 4px;
+  }
+  .tl-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #d0d0d6;
+    margin-bottom: 6px;
+  }
+  .tl-desc {
+    font-size: 14px;
+    color: #a0a0a6;
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 96px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 13px;
+    color: #86868b;
+    text-align: center;
+  }
+  .footer div {
+    margin-bottom: 8px;
+  }
+  .footer div:last-child {
+    margin-bottom: 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .two-col { grid-template-columns: 1fr; }
+    .exec-grid { grid-template-columns: repeat(2, 1fr); }
+    .sum-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 48px 20px 80px; }
+    h1 { font-size: 38px; }
+    h2 { font-size: 28px; }
+    .exec-grid { grid-template-columns: 1fr; }
+    .sum-row { grid-template-columns: 1fr; }
+    .hero-meta { gap: 20px; }
+    .hero-meta-item .val { font-size: 16px; }
+    table { font-size: 12px; }
+    td, th { padding: 12px; }
+    .bar-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- LOGO HEADER -->
+  <div class="logo-header">
+    <svg class="plc-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="50" y="30" width="30" height="30" fill="#000"/>
+      <rect x="90" y="30" width="30" height="30" fill="#000"/>
+      <rect x="130" y="30" width="30" height="30" fill="#000"/>
+      <rect x="30" y="70" width="30" height="30" fill="#000"/>
+      <rect x="70" y="70" width="30" height="30" fill="#000"/>
+      <rect x="110" y="70" width="30" height="30" fill="#000"/>
+      <rect x="150" y="70" width="30" height="30" fill="#000"/>
+      <rect x="50" y="110" width="30" height="30" fill="#000"/>
+      <rect x="90" y="110" width="30" height="30" fill="#000"/>
+      <rect x="130" y="110" width="30" height="30" fill="#000"/>
+      <rect x="70" y="150" width="30" height="30" fill="#000"/>
+      <rect x="110" y="150" width="30" height="30" fill="#000"/>
+    </svg>
+  </div>
+
+  <!-- HERO / TITLE -->
+  <section class="hero">
+    <div class="eyebrow">Infrastructure Investment</div>
+    <h1>Winter Maintenance &amp; Upgrades</h1>
+    <p class="hero-sub">Three interdependent projects, current status, and consolidated funding requirement. A snapshot of critical infrastructure work at Hotel Yelcho, May 2026.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="label">Total Investment</div>
+        <div class="val">USD $41,821</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Report Date</div>
+        <div class="val">May 2026</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Projects</div>
+        <div class="val">3 concurrent</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== EXEC SUMMARY =================== -->
+  <section>
+    <div class="sec-eyebrow" style="color:#d88a6e;">Executive Summary</div>
+    <h2>Three critical projects at a glance</h2>
+    <p class="sec-sub">All three address deteriorated infrastructure. None are optional. Two are already in motion; one is gated on a payment decision.</p>
+
+    <div class="exec-grid">
+      <div class="exec-card" style="--accent:#d88a6e;">
+        <div class="icon">🏡</div>
+        <div class="proj-name">Cabins Structural</div>
+        <div class="amount">$12,000</div>
+        <div class="clp">CLP 10.1M</div>
+        <span class="status-tag">In Progress</span>
+      </div>
+      <div class="exec-card" style="--accent:#e8b04b;">
+        <div class="icon">⚡</div>
+        <div class="proj-name">Workshop Electric</div>
+        <div class="amount">$10,421</div>
+        <div class="clp">CLP 9.17M</div>
+        <span class="status-tag">Pending Payment</span>
+      </div>
+      <div class="exec-card" style="--accent:#6ab3c4;">
+        <div class="icon">🛁</div>
+        <div class="proj-name">Hotel Bathrooms</div>
+        <div class="amount">$19,400</div>
+        <div class="clp">8 units renovated</div>
+        <span class="status-tag">In Progress</span>
+      </div>
+    </div>
+
+    <div class="total-bar">
+      <div>
+        <div class="label">Combined investment requirement</div>
+        <div class="amount">$41,821</div>
+        <div class="sub">USD, across all three projects</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== CABINS =================== -->
+  <section>
+    <div class="sec-eyebrow" style="color:#d88a6e;">Project 1 of 3</div>
+    <h2>Cabins Structural Maintenance</h2>
+    <p class="sec-sub">Foundation, framing, weatherproofing, and interior finishes. Diagnosis complete; one disassembly will confirm full scope.</p>
+
+    <div class="two-col">
+      <div class="panel accent-panel" style="--accent: #d88a6e; --accent-soft: rgba(216,138,110,0.08); --accent-border: rgba(216,138,110,0.25);">
+        <h4>The Problem</h4>
+        <ul>
+          <li>Skylights: extensive wood rot, loss of structural integrity</li>
+          <li>Framing: degradation beyond weatherproofing alone</li>
+          <li>Interior: water ingress has compromised walls and ceilings</li>
+          <li>Foundation: settling and cracks, requiring assessment once structure is exposed</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>Diagnosis &amp; Timeline</h4>
+        <ul>
+          <li><strong style="color:#f5f5f7;">Visual inspection:</strong> Completed March 2026</li>
+          <li><strong style="color:#f5f5f7;">Disassembly:</strong> One cabin to begin immediately</li>
+          <li><strong style="color:#f5f5f7;">Scope confirmation:</strong> After disassembly &amp; measurement</li>
+          <li><strong style="color:#f5f5f7;">Unknown area:</strong> Beyond skylights, dimensions still needed</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4 style="margin-top:56px;">Cost Estimate — Cabins</h4>
+    <div class="breakdown-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="num">Qty</th>
+            <th class="num">Unit Price (CLP)</th>
+            <th class="num">Subtotal (CLP)</th>
+            <th class="num">USD</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Roofing (complete replacement, 2 cabins)</td><td class="num">280 m²</td><td class="num">$30,000/m²</td><td class="num">$8,400,000</td><td class="num">$9,450</td></tr>
+          <tr><td>Structural framing (repair &amp; replace)</td><td class="num">1</td><td class="num">$800,000</td><td class="num">$800,000</td><td class="num">$900</td></tr>
+          <tr><td>Interior walls &amp; insulation</td><td class="num">1</td><td class="num">$500,000</td><td class="num">$500,000</td><td class="num">$562</td></tr>
+          <tr style="background:rgba(255,255,255,0.04);"><td><strong>Total estimated cost</strong></td><td></td><td></td><td class="num"><strong>$9,700,000</strong></td><td class="num"><strong>$10,912</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col" style="margin-top:28px;">
+      <div></div>
+      <div class="cost-panel">
+        <h4>Cost Summary</h4>
+        <div class="cost-row"><span class="desc">Roofing materials &amp; labor</span><span class="val">$9,450</span></div>
+        <div class="cost-row"><span class="desc">Structural repair</span><span class="val">$900</span></div>
+        <div class="cost-row"><span class="desc">Interior finishes</span><span class="val">$562</span></div>
+        <div class="cost-row"><span class="desc">Contingency &amp; unknowns</span><span class="val">$1,088</span></div>
+        <div class="cost-total">
+          <span class="desc">Project total</span>
+          <span class="val">$12,000</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== WORKSHOP =================== -->
+  <section>
+    <div class="sec-eyebrow" style="color:#e8b04b;">Project 2 of 3</div>
+    <h2>Workshop Underground Feeder</h2>
+    <p class="sec-sub">Installation of TE1 electrical certification compliant underground feed to workshop. Quoted April 10, 2026. Awaiting authorization.</p>
+
+    <div class="two-col">
+      <div class="panel accent-panel" style="--accent: #e8b04b; --accent-soft: rgba(232,176,75,0.08); --accent-border: rgba(232,176,75,0.25);">
+        <h4>Scope</h4>
+        <ul>
+          <li>Underground cable feed from main building to workshop</li>
+          <li>Meets TE1 electrical certification requirements</li>
+          <li>Includes conduit, breakers, and disconnects</li>
+          <li>Single quote obtained; awaiting payment authorization</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>Status &amp; Timeline</h4>
+        <ul>
+          <li><strong style="color:#f5f5f7;">Quoted:</strong> April 10, 2026</li>
+          <li><strong style="color:#f5f5f7;">By:</strong> Comercial R &amp; H Ltda</li>
+          <li><strong style="color:#f5f5f7;">Duration once approved:</strong> 60 days</li>
+          <li><strong style="color:#f5f5f7;">Current gate:</strong> Payment authorization</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4 style="margin-top:56px;">Quote — Comercial R &amp; H Ltda</h4>
+    <div class="breakdown-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="num">Unit Price (CLP)</th>
+            <th class="num">Total (CLP)</th>
+            <th class="num">USD</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Underground cable feeder installation (TE1 compliant)</td><td class="num">$9,237,000</td><td class="num">$9,237,000</td><td class="num">$10,383</td></tr>
+          <tr style="background:rgba(255,255,255,0.04);"><td><strong>Total quoted</strong></td><td></td><td class="num"><strong>$9,237,000</strong></td><td class="num"><strong>$10,383</strong></td></tr>
+          <tr><td colspan="3">Transport &amp; misc costs</td><td class="num"><strong>$38</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col" style="margin-top:28px;">
+      <div></div>
+      <div class="cost-panel">
+        <h4>Cost Summary</h4>
+        <div class="cost-row"><span class="desc">Quote (Comercial R &amp; H)</span><span class="val">$10,383</span></div>
+        <div class="cost-row"><span class="desc">Transport &amp; logistics</span><span class="val">$38</span></div>
+        <div class="cost-total">
+          <span class="desc">Project total</span>
+          <span class="val">$10,421</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== BATHROOMS =================== -->
+  <section>
+    <div class="sec-eyebrow" style="color:#6ab3c4;">Project 3 of 3</div>
+    <h2>Hotel Bathrooms Renovation</h2>
+    <p class="sec-sub">8 guest bathrooms: removal of outdated bathtubs, installation of modern shower systems, new flooring, fixtures, and finishes. Partially underway.</p>
+
+    <div class="two-col">
+      <div class="panel accent-panel" style="--accent: #6ab3c4; --accent-soft: rgba(106,179,196,0.08); --accent-border: rgba(106,179,196,0.25);">
+        <h4>Why Now</h4>
+        <ul>
+          <li>Safety: Old bathtubs pose fall hazard for older guests</li>
+          <li>Compliance: Code now requires slip-resistant surfaces</li>
+          <li>Moisture: Water ingress has damaged surrounding walls</li>
+          <li>Market: Modern showers are guest expectation in premium lodging</li>
+        </ul>
+        <div class="callout">
+          <strong>Pipes — already addressed.</strong> When we tore out the bathrooms, we noticed some of the pipes were in really bad shape, clogged with sediment from the local water intake. We cleared what we could and replaced the most damaged sections. <strong>Spent so far: $2,500</strong> (not included in the figures below).
+        </div>
+      </div>
+      <div class="panel accent-panel">
+        <h4>Scale &amp; Schedule</h4>
+        <ul>
+          <li><strong style="color:#f5f5f7;">8</strong> hotel bathrooms in scope</li>
+          <li><strong style="color:#f5f5f7;">30</strong> working days</li>
+          <li><strong style="color:#f5f5f7;">2</strong> workers on site</li>
+          <li>Budget reference: <strong style="color:#f5f5f7;">N° 146 · 04/06/26</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <h4 style="margin-top:56px;">Labor (Workhand) Budget — by Activity</h4>
+    <div class="breakdown-table">
+      <table>
+        <thead>
+          <tr>
+            <th class="num">Qty</th>
+            <th>Description</th>
+            <th class="num">Unit Price (CLP)</th>
+            <th class="num">Subtotal (CLP)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="num">8</td><td>Retiro de tinas (bathtub removal)</td><td class="num">$50,000</td><td class="num">$400,000</td></tr>
+          <tr><td class="num">8</td><td>Modificación cerámicas (ceramic walls)</td><td class="num">$120,000</td><td class="num">$960,000</td></tr>
+          <tr><td class="num">8</td><td>Piso cerámica (ceramic flooring)</td><td class="num">$70,000</td><td class="num">$560,000</td></tr>
+          <tr><td class="num">8</td><td>Modificación pasamanos y grifería (handrails &amp; fittings)</td><td class="num">$40,000</td><td class="num">$320,000</td></tr>
+          <tr><td class="num">8</td><td>Instalación de duchas / shower doors</td><td class="num">$150,000</td><td class="num">$1,200,000</td></tr>
+          <tr><td class="num">8</td><td>Limpieza y retiro de escombros (cleanup &amp; debris)</td><td class="num">$80,000</td><td class="num">$640,000</td></tr>
+          <tr><td class="num">30</td><td>Traslados y colaciones (transport &amp; meals)</td><td class="num">$20,000</td><td class="num">$600,000</td></tr>
+          <tr style="background:rgba(255,255,255,0.04);"><td></td><td><strong>Subtotal labor</strong></td><td></td><td class="num"><strong>$4,680,000</strong></td></tr>
+          <tr><td></td><td colspan="2">+ 20% Utilidades (overhead/profit) and VAT applied</td><td class="num"><strong>≈ $5,569,200</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 style="margin-top:32px;">Materials &amp; Fixtures</h4>
+    <div class="breakdown-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Supplier</th>
+            <th class="num">Qty</th>
+            <th class="num">Total CLP</th>
+            <th class="num">Total USD</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Bathroom Partitions</td><td>MK8</td><td class="num">1</td><td class="num">$1,199,920</td><td class="num">$1,348</td><td><span class="pill pill-quoted">Quoted</span></td></tr>
+          <tr><td>Bronze Antique Shower Column</td><td>MK8</td><td class="num">1</td><td class="num">$3,199,920</td><td class="num">$3,595</td><td><span class="pill pill-quoted">Quoted</span></td></tr>
+          <tr><td>Receptacle Klipen</td><td>MK8</td><td class="num">1</td><td class="num">$1,199,920</td><td class="num">$1,348</td><td><span class="pill pill-purchased">Purchased</span></td></tr>
+          <tr><td>Toilets 1420×710</td><td>MK8</td><td class="num">1</td><td class="num">$739,040</td><td class="num">$830</td><td><span class="pill pill-quoted">Quoted</span></td></tr>
+          <tr><td>Shower Wall Area</td><td>MK</td><td class="num">63</td><td class="num">$1,385,370</td><td class="num">$1,458</td><td><span class="pill pill-purchased">Purchased</span></td></tr>
+          <tr><td>Floor Coverings</td><td>Sodimac</td><td class="num">30</td><td class="num">$650,700</td><td class="num">$731</td><td><span class="pill pill-quoted">Quoted</span></td></tr>
+          <tr><td>Towel Racks</td><td>MK8</td><td class="num">1</td><td class="num">$1,391,920</td><td class="num">$1,564</td><td><span class="pill pill-quoted">Quoted</span></td></tr>
+          <tr><td>Towel Rack Furniture</td><td>MK8</td><td class="num">1</td><td class="num">$710,320</td><td class="num">$798</td><td><span class="pill pill-quoted">Quoted</span></td></tr>
+          <tr><td>Bathroom Faucets</td><td>MK8</td><td class="num">1</td><td class="num">$679,920</td><td class="num">$764</td><td><span class="pill pill-quoted">Quoted</span></td></tr>
+          <tr><td>Toilet Paper Holder</td><td>MK8</td><td class="num">1</td><td class="num">$179,920</td><td class="num">$202</td><td><span class="pill pill-quoted">Quoted</span></td></tr>
+          <tr><td>Double Hook</td><td>MK8</td><td class="num">1</td><td class="num">$183,920</td><td class="num">$207</td><td><span class="pill pill-quoted">Quoted</span></td></tr>
+          <tr><td>Transportation Costs</td><td>Pineda / Other</td><td class="num">1</td><td class="num">$806,461</td><td class="num">$849</td><td><span class="pill pill-estimated">Estimated</span></td></tr>
+          <tr><td>Bulk Materials (1st Purchase)</td><td>Sodimac</td><td class="num">1</td><td class="num">$778,919</td><td class="num">$820</td><td><span class="pill pill-purchased">Purchased</span></td></tr>
+          <tr><td>Bulk Materials (2nd Purchase)</td><td>Sodimac</td><td class="num">1</td><td class="num">$609,449</td><td class="num">$642</td><td><span class="pill pill-pending">Pending</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col" style="margin-top:28px;">
+      <div></div>
+      <div class="cost-panel">
+        <h4>Cost Summary</h4>
+        <div class="cost-row"><span class="desc">Fixtures &amp; Fittings</span><span class="val">CLP 9,630,850&nbsp;·&nbsp;$10,812</span></div>
+        <div class="cost-row"><span class="desc">Transportation</span><span class="val">CLP 806,461&nbsp;·&nbsp;$849</span></div>
+        <div class="cost-row"><span class="desc">Bulk Materials</span><span class="val">CLP 1,388,368&nbsp;·&nbsp;$1,462</span></div>
+        <div class="cost-row"><span class="desc">Workhand</span><span class="val">CLP 5,569,200&nbsp;·&nbsp;$6,300</span></div>
+        <div class="cost-total">
+          <span class="desc">Total project</span>
+          <span class="val">
+            $19,400 USD
+            <span class="clp">As stated in source</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== CONSOLIDATED VIEW =================== -->
+  <section>
+    <div class="sec-eyebrow" style="color:#DA7756;">Consolidated View</div>
+    <h2>Funding picture, at a glance</h2>
+    <p class="sec-sub">How the three projects compare in size, what the combined funding requirement looks like, and the current status of each.</p>
+
+    <div class="chart-wrap">
+      <div class="chart-title">Investment by project — USD</div>
+      <div class="bar-row">
+        <div class="bar-header">
+          <span class="bar-label">🏡&nbsp; Cabins Maintenance</span>
+          <span class="bar-value">$12,000 <span class="clp">CLP 10.1M</span></span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width: 61.8%; background:#d88a6e;"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-header">
+          <span class="bar-label">⚡&nbsp; Workshop Underground Feeder</span>
+          <span class="bar-value">$10,421 <span class="clp">CLP 9.17M</span></span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width: 53.7%; background:#e8b04b;"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-header">
+          <span class="bar-label">🛁&nbsp; Hotel Bathrooms Renovation</span>
+          <span class="bar-value">$19,400 <span class="clp">8 bathrooms</span></span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width: 100%; background:#6ab3c4;"></div></div>
+      </div>
+    </div>
+
+    <div class="sum-row">
+      <div class="stat-card">
+        <div class="stat-label">Combined investment</div>
+        <div class="stat-val">$41,821</div>
+        <div class="stat-sub">USD, total of all three</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Largest project</div>
+        <div class="stat-val">Bathrooms</div>
+        <div class="stat-sub">46% of combined budget</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Already spent</div>
+        <div class="stat-val">$2,500</div>
+        <div class="stat-sub">Bathroom pipe repairs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Most urgent (payment)</div>
+        <div class="stat-val">Workshop</div>
+        <div class="stat-sub">Pending payment · High priority</div>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:36px;">
+      <div class="panel">
+        <h4>Status &amp; Funding Sequence</h4>
+        <div class="timeline">
+          <div class="tl-item" style="--dot-color:#e8b04b;">
+            <div class="tl-meta">⚡ Electrical · Pending payment</div>
+            <div class="tl-title">Workshop Underground Feeder — $10,421</div>
+            <div class="tl-desc">Quoted April 10, 2026 by Comercial R &amp; H Ltda. Awaiting authorization to proceed with payment. Estimated duration once started: 60 days.</div>
+          </div>
+          <div class="tl-item" style="--dot-color:#d88a6e;">
+            <div class="tl-meta">🏡 Structural · In progress</div>
+            <div class="tl-title">Cabins Maintenance — $12,000</div>
+            <div class="tl-desc">Diagnosis complete; full scope confirms after one cabin is disassembled. Additional area beyond skylights still to be measured.</div>
+          </div>
+          <div class="tl-item" style="--dot-color:#6ab3c4;">
+            <div class="tl-meta">🛁 Guest Safety · In progress</div>
+            <div class="tl-title">Hotel Bathrooms Renovation — $19,400</div>
+            <div class="tl-desc">8 bathrooms, 30 working days, 2 workers. Some materials already purchased; pipe-replacement work already incurred ($2,500).</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel accent-panel" style="--accent: #DA7756; --accent-soft: rgba(218,119,86,0.08); --accent-border: rgba(218,119,86,0.25);">
+        <h4>What ties these projects together</h4>
+        <p>All three address infrastructure that has already deteriorated past the point of cosmetic repair. They are <strong style="color:#f5f5f7;">not optional upgrades</strong> — each carries a concrete risk if deferred:</p>
+        <ul style="margin-top:14px;">
+          <li><strong style="color:#f5f5f7;">Cabins:</strong> structural — potential partial roof collapse</li>
+          <li><strong style="color:#f5f5f7;">Workshop:</strong> compliance — TE1 electrical certification</li>
+          <li><strong style="color:#f5f5f7;">Bathrooms:</strong> guest safety — outdated bathtubs, hazard for older guests</li>
+        </ul>
+        <p style="margin-top:14px;">Two of the three are already underway. The workshop is the only one fully gated on a payment decision.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div>Hotel Yelcho en la Patagonia · Maintenance Investment Report · May 2026</div>
+    <div>Prepared by Sebastián White · GM</div>
+  </div>
+
+</div>
+</body>
+</html>
